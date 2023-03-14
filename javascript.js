@@ -38,10 +38,18 @@ function playRound(pc, user) {
 	else if (pc == "scissors" && user == "scissors")
 		return ("It's a tie! " + capitalize(pc) + " tie with a " + capitalize(user))
 	else
-		return ("You didn't enter rock, paper or scissors...")
+		return ("You didn't enter rock, paper or scissors..")
 }
 
 function rockPaperScissors() {
-	
+	let i = 0;
+	let result;
+	while (i < 5) {
+		result = playRound(computerSelection(), playerSelection());
+		console.log(result);
+		if (result.slice(4, 7) == "Win")
+			i++;
+		alert(result + ". And your score is: " + i);
+	}
 }
-console.log(playRound(computerSelection(), playerSelection()))
+rockPaperScissors()
