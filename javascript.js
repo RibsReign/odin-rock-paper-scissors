@@ -16,11 +16,11 @@ function computerSelection() {
 		return "scissors"
 }
 
-function playerSelection() {
+/* function playerSelection() {
 	let lowerMe = prompt("Rock, Paper, Scissors?")
 	let lowerSelection = lowerMe => lowerMe.toLowerCase()
 	return (lowerSelection(lowerMe))
-}
+} */
 
 function playRound(pc, user) {
 	console.log(pc, user);
@@ -41,15 +41,40 @@ function playRound(pc, user) {
 		return ("You didn't enter rock, paper or scissors..")
 }
 
-function rockPaperScissors() {
-	let i = 0;
+function rockPaperScissors(user) {
+	let pcS = pcS ?? 0;
+	let userS = userS ?? 0;
 	let result;
-	while (i < 5) {
-		result = playRound(computerSelection(), playerSelection());
-		console.log(result);
-		if (result.slice(4, 7) == "Win")
-			i++;
-		alert(result + ". And your score is: " + i);
-	}
+	result = playRound(computerSelection(), user);
+	if (result.slice(4, 7) == "Win") userS++;
+	if (result.slice(4, 8) == "Lose") pcS++;
+
+	if (pcS >= 5)
+		return (result + ". Game Over, PC wins! Score: 5:" + userS);
+	if (userS >= 5)
+		return (result + ". Game Over, You win! Score: 5:" + pcS);
+	return (result + `. And the score is User:${userS} PC:${pcS}`);
+
 }
-rockPaperScissors()
+const buttons = document.querySelectorAll("button")
+
+buttons.forEach((button) => {
+	button.addEventListener("click", () => {
+		switch (button.id) {
+			case 'rock':
+				result.textContent = rockPaperScissors(computerSelection(), "rock");
+				break;
+			case 'paper':
+				result.textContent = rockPaperScissors(computerSelection(), "paper");
+				break;
+			case 'scissors':
+				result.textContent = rockPaperScissors(computerSelection(), "scissors");
+				break;
+		}
+		document.body.appendChild(result);
+	})
+})
+const container = document.querySelector("#container");
+const result = document.createElement("div");
+result.setAttribute("style", "display:flex; justify-content:center; margin: 10px");
+/* rockPaperScissors() */
